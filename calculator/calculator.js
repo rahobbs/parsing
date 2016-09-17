@@ -45,32 +45,64 @@ Calculator.prototype.number = function () {
  */
 Calculator.prototype.factor = function () {
   var nextChar = this.peek();
-  if (nextChar.match(/[0-9.]/)){
-    return this.number();
-  } else if (nextChar === '-'){
-    this.get();
-    return 0 - this.number();
-  }
+  if (nextChar === "(") {
+    // nextChar = this.get();
+    // var innerExp = '';
+    // while (nextChar !== ")") {
+    //   innerExp += nextChar;
+    //   nextChar = this.get();
+    // }
+    // return (new Calculator(innerExp).run());
+  } else {
+  return this.number();
+}
+  // var nextChar = this.peek();
+  // if (nextChar.match(/[0-9.]/)){
+  //   return this.number();
+  // } else if (nextChar === '-'){
+  //   this.get();
+  //   return 0 - this.number();
+  // } else if (nextChar === "(") {
+  //   nextChar = this.get();
+  //   var innerExp = '';
+  //   while (nextChar !== ")") {
+  //     innerExp += nextChar;
+  //     nextChar = this.get();
+  //   }
+  //   return (new Calculator(innerExp).run());
+  // }
 }
 
 /*
   term = factor {(*|/) factor}
  */
 Calculator.prototype.term = function () {
-  var nextChar = this.peek();
-  if (nextChar !== '*' || nextChar !== '/'){
-    return this.number();
-  } else {
-    var result = this.number();
-    while (this.peek() == '*' || this.peek() == '/') {
-      if (this.get() == '*') {
-        result *= this.number();
-      } else {
-        result /= this.term();
-      }
+  var result = this.factor();
+  while (this.peek() == '*' || this.peek() == '/') {
+    if (this.get() == '*') {
+      result *= this.factor();
+    } else {
+      result /= this.factor();
     }
-    return result;
   }
+  return result;
+
+
+  // var nextChar = this.peek();
+  // if (nextChar !== '*' || nextChar !== '/'){
+  //   return this.number();
+  // } else if{
+  //   var result = this.number();
+  //   while (this.peek() == '*' || this.peek() == '/') {
+  //     if (this.get() == '*') {
+  //       result *= this.number();
+  //     } else {
+  //       result /= this.term();
+  //     }
+  //   }
+  //   return result;
+  // }
+  // return this.factor();
 }
 
 /* Grammar Rules
