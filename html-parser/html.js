@@ -28,7 +28,7 @@ function HTMLParser() {
   // parse a sequence of sibling nodes
   function parseNodes() {
     var nodes = [];
-    while (true) {
+    for(var i=0; i< 100; i++) {
       consumeWhiteSpace();
       if (eof() === true || startsWith('</') === true) {
         break;
@@ -60,7 +60,7 @@ function HTMLParser() {
     var attrs;
 
     // check that we've got an end >
-    // 
+    //
     // <div class="MyClass"><h1>adsfs</h1>aflsdajkflsjdfkldjfkladsf</div>
     assert(consumeChar() === '>');
 
@@ -68,7 +68,7 @@ function HTMLParser() {
     var children;
 
     // check that we have a matching end tag
-    // and that the tag is the same 
+    // and that the tag is the same
     // hint:
     //   use parseTagName to get the tagName and match it to the previous one
     assert(consumeChar() === '<');
@@ -93,8 +93,8 @@ function HTMLParser() {
   // e.g. class="my-class" id="testId"
   // Hint:
   // - You have continue parsing until you find the >
-  // - Consume White Space until you find an Attribute  
-  // 
+  // - Consume White Space until you find an Attribute
+  //
   // attributes = attr*
   function parseAttributes() {
     var attributes = {};
@@ -122,7 +122,7 @@ function HTMLParser() {
   function parseAttributeValue() {
     // check for a quote
     // similar to parseTagName - get everything that's not an end-quote: "
-    // check for end quote 
+    // check for end quote
     return value;
 
   }

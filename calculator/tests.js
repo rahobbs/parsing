@@ -17,7 +17,7 @@ describe("calculator", function() {
     expect(calc.factor()).toEqual(-123.15);
   });
 
-  it("has a factor() function that can parentheses around expressions", function() {
+  it("has a factor() function that can handle parentheses around expressions", function() {
     var calc = new Calculator("(123)");
     // factor has a rule that consumes the left and right paren an expr inside
     // this means you aren't using the real expression function but a fake one
@@ -27,7 +27,7 @@ describe("calculator", function() {
       calc.expressionToParse.shift();
       calc.expressionToParse.shift();
       calc.expressionToParse.shift();
-      return 123;     
+      return 123;
     });
 
     expect(calc.factor()).toEqual(123);
@@ -69,7 +69,7 @@ describe("calculator", function() {
   })
 
   it("handles division statements", function() {
-    expect((new Calculator("8/2)")).run()).toEqual(4);
+    expect((new Calculator("8/2")).run()).toEqual(4);
   })
 
   it("handles any number of multiplication statements", function() {
@@ -77,10 +77,11 @@ describe("calculator", function() {
   })
 
   it("handles any number of division statements", function() {
-    expect((new Calculator("(100/2/5/5")).run()).toEqual(2);
+    expect((new Calculator("100/2/5/5")).run()).toEqual(2);
   })
 
   it("handles a math expression with parentheses", function() {
+    debugger;
     expect((new Calculator("(5-3*4)")).run()).toEqual(-7);
   })
 

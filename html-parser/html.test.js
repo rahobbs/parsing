@@ -10,14 +10,14 @@ describe('HTMLParser', function () {
         expect(nodes.tagName).toEqual('html');
     });
 
-    ('should parse html with newlines', function () {
+    it('should parse html with newlines', function () {
         var nodes = HTMLParser().parse('<html>\n</html>');
         expect(nodes.children).toEqual([]);
         expect(nodes.attributes).toEqual({});
         expect(nodes.tagName).toEqual('html');
     });
 
-    it('should parse nested tags', function () {
+    xit('should parse nested tags', function () {
         var nodes = HTMLParser().parse('<html><body></body></html>');
         expect(nodes.children[0].tagName).toEqual('body');
         expect(nodes.children[0].children).toEqual([]);
@@ -25,7 +25,7 @@ describe('HTMLParser', function () {
         expect(nodes.tagName).toEqual('html');
     });
 
-    it('should parse text nodes', function () {
+    xit('should parse text nodes', function () {
         var nodes = HTMLParser().parse('<html>hello</html>');
 
         expect(nodes.children[0].text).toEqual("hello");
@@ -33,7 +33,7 @@ describe('HTMLParser', function () {
         expect(nodes.tagName).toEqual('html');
     });
 
-    it('should parse attributes with quoted values', function () {
+    xit('should parse attributes with quoted values', function () {
         var nodes = HTMLParser().parse('<html lang="us"></html>');
         expect(nodes.children).toEqual([]);
         expect(nodes.attributes).toEqual({
@@ -42,7 +42,7 @@ describe('HTMLParser', function () {
         expect(nodes.tagName).toEqual('html');
     });
 
-    it('should create a root element if sibling nodes are parsed', function () {
+    xit('should create a root element if sibling nodes are parsed', function () {
         var nodes = HTMLParser().parse('<div></div><div></div>');
         expect(nodes.tagName).toEqual('html');
         expect(nodes.children.length).toEqual(2);

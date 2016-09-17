@@ -44,33 +44,27 @@ Calculator.prototype.number = function () {
     - If we see a "-", return the negative of the factor
  */
 Calculator.prototype.factor = function () {
+
   var nextChar = this.peek();
-  if (nextChar === "(") {
-    // nextChar = this.get();
-    // var innerExp = '';
-    // while (nextChar !== ")") {
-    //   innerExp += nextChar;
-    //   nextChar = this.get();
-    // }
-    // return (new Calculator(innerExp).run());
-  } else {
-  return this.number();
-}
-  // var nextChar = this.peek();
-  // if (nextChar.match(/[0-9.]/)){
-  //   return this.number();
-  // } else if (nextChar === '-'){
-  //   this.get();
-  //   return 0 - this.number();
-  // } else if (nextChar === "(") {
-  //   nextChar = this.get();
-  //   var innerExp = '';
-  //   while (nextChar !== ")") {
-  //     innerExp += nextChar;
-  //     nextChar = this.get();
-  //   }
-  //   return (new Calculator(innerExp).run());
-  // }
+
+  if (nextChar.match(/[0-9.]/)){
+    return this.number();
+  } else if (nextChar === '-'){
+    this.get();
+    return 0 - this.number();
+  } else if (nextChar === '('){
+    nextChar = this.get();
+    var innerExp = '';
+    while (nextChar !== ')'){
+      nextChar = this.get();
+      innerExp += nextChar;
+    }
+    if (innerExp.slice(innerExp.length - 1 === ')')){
+      innerExp = innerExp.slice(0,innerExp.length - 1);
+    }
+
+    return Number(innerExp);
+  }
 }
 
 /*
