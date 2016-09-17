@@ -23,7 +23,6 @@ Calculator.prototype.get = function () {
     followed by any number of numbers (or the period .)
  */
 Calculator.prototype.number = function () {
-  var num = '';
   var nextChar = this.peek();
   if (!nextChar.match(/[0-9.]/)){
     return '';
@@ -45,14 +44,33 @@ Calculator.prototype.number = function () {
     - If we see a "-", return the negative of the factor
  */
 Calculator.prototype.factor = function () {
-
+  var nextChar = this.peek();
+  if (nextChar.match(/[0-9.]/)){
+    return this.number();
+  } else if (nextChar === '-'){
+    this.get();
+    return 0 - this.number();
+  }
 }
 
 /*
   term = factor {(*|/) factor}
  */
 Calculator.prototype.term = function () {
-
+  var nextChar = this.peek();
+  if (nextChar !== '*' || nextChar !== '/'){
+    return this.number();
+  } else {
+    var result = this.number();
+    while (this.peek() == '*' || this.peek() == '/') {
+      if (this.get() == '*') {
+        result *= this.number();
+      } else {
+        result /= this.term();
+      }
+    }
+    return result;
+  }
 }
 
 /* Grammar Rules
