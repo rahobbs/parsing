@@ -23,7 +23,16 @@ Calculator.prototype.get = function () {
     followed by any number of numbers (or the period .)
  */
 Calculator.prototype.number = function () {
-
+  var num = '';
+  var nextChar = this.peek();
+  if (!nextChar.match(/[0-9.]/)){
+    return '';
+  } else {
+    if (nextChar === '.'){
+      return this.get() + this.number();
+    }
+    return Number(this.get() + this.number());
+  }
 }
 
 /* Grammar Rule:
@@ -31,7 +40,7 @@ Calculator.prototype.number = function () {
           | "(" expression ")"
           | - factor
   Hints:
-    - If we see a number, produce a number 
+    - If we see a number, produce a number
     - If we see a (  then consume it and an expression
     - If we see a "-", return the negative of the factor
  */
@@ -60,5 +69,8 @@ Calculator.prototype.expression = function () {
   }
   return result;
 }
+<<<<<<< HEAD
 
 a{2}
+=======
+>>>>>>> ec7a5d10e150c1ed7cf2dad26fbf9909055dd3b4
