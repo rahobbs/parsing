@@ -60,3 +60,5 @@ Calculator.prototype.expression = function () {
   }
   return result;
 }
+
+a{2}
